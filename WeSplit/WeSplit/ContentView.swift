@@ -57,11 +57,15 @@ struct ContentView: View {
                 
                 // Challenge 2
                 Section {
-                    Text("Tip value: \(totalCalculations[0])")
-                    Text("Grand Total: \(totalCalculations[1])")
-                    Text(totalCalculations[2], format: localCurrencyCode)
+                    Text(totalCalculations[1], format: localCurrencyCode)
                 } header: {
-                    // Challenge 1
+                    Text("Grand total: ")
+                }
+                
+                Section {
+                    Text(totalCalculations[2], format: localCurrencyCode)
+                // Challenge 1
+                } header: {
                     Text("Amount for each person: ")
                 }
             }
