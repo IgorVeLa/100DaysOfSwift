@@ -60,14 +60,16 @@ struct ContentView: View {
                     Text(totalCalculations[1], format: localCurrencyCode)
                 } header: {
                     Text("Grand total: ")
+                    // Project 3 challenge 1
+                        .foregroundColor(tipPercentage > 0 ? .black : .red)
                 }
-                
                 Section {
                     Text(totalCalculations[2], format: localCurrencyCode)
                 // Challenge 1
                 } header: {
                     Text("Amount for each person: ")
                 }
+                
             }
             .navigationTitle("WeSplit")
             .toolbar {
