@@ -24,17 +24,28 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            LinearGradient(stops: [
+                Gradient.Stop(color: .white, location: 0.2),
+                Gradient.Stop(color: .gray, location: 0.9),
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
             VStack {
-                VStack {
-                    Text("Score: \(score)/\(turns)")
-                        .font(.system(.title, design: .monospaced))
-                        .padding(.bottom)
-                    Text("Their move: \(moves[appMove])")
-                        .font(.system(.title3))
-                    Text(shouldWin ? "Should you win: yes" : "Should you win: no")
-                        .font(.title3)
-                        .padding(.bottom)
+                Text("Score: \(score)/\(turns)")
+                    .font(.system(.title, design: .monospaced))
+                Text("Best out of 10")
+                    .opacity(0.4)
+                    .padding(.bottom)
+                Text("Their move: \(moves[appMove])")
+                    .font(.system(.title3))
+                Group {
+                    Text("Should you win: ")
+                    + Text(shouldWin ? "yes" : "no")
+                        .foregroundColor(shouldWin ? .green : .red)
+                        .fontWeight(.bold)
                 }
+                .font(.title3)
+                .padding(.bottom)
+    
                 Text("Your move:")
                     .font(.headline)
                 HStack {
@@ -141,4 +152,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
