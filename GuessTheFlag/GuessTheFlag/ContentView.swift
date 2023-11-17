@@ -25,7 +25,8 @@ extension View {
 }
 
 struct ContentView: View {
-    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var userAnswer = 0
     @State private var correctAnswer = Int.random(in: 0...2)
     
     
@@ -35,6 +36,10 @@ struct ContentView: View {
     @State private var scoreMsg = ""
     @State private var turns = 8
     @State private var score = 0
+    
+    @State private var degreeAmount = [0.0, 0.0, 0.0]
+    @State private var opacityAmount = [1.0, 1.0, 1.0]
+    @State private var scaleAmount = [1.0, 1.0, 1.0]
     
     var body: some View {
         ZStack {
@@ -70,21 +75,27 @@ struct ContentView: View {
                 VStack(spacing: 65) {
                     ForEach(0..<3) { number in
                         Button {
-                           flagTapped(number)
+                            flagTapped(number)
+                            userAnswer = number
                         } label: {
                             Image(countries[number])
                             // Project 3 challenge 2
                                 .flagStyle()
                         }
+                        // Project 6: Challenge 1
+                        .rotation3DEffect(.degrees(degreeAmount[number]), axis: (x:0,y:1,z:0))
+                        // Project 6: Challenge 2
+                        .opacity(opacityAmount[number])
+                        // Project 6: Challenge 3
+                        .scaleEffect(scaleAmount[number])
                     }
                 }
             }
             .padding()
             
             .alert(scoreTitle, isPresented: $showingScore) {
-                Button("Continue", action: askQuestion)
-            } message: {
-                Text("\(scoreMsg)")
+                Button("Continue", action: askQuestion)            } message: {
+                    Text("\(scoreMsg)")
             }
             
             .alert("GAME OVER", isPresented: $showingReset) {
@@ -107,8 +118,26 @@ struct ContentView: View {
             turns -= 1
         }
         
+        // Project 6: Challenge 1
+        withAnimation {
+            degreeAmount[number] += 360
+        }
+        
+        for notSelected in 0..<3 where notSelected != number {
+            withAnimation {
+                // Project 6: Challenge 2
+                opacityAmount[notSelected] = 0.25
+                // Project 6: Challenge 3
+                scaleAmount[notSelected] = 0.85
+            }
+        }
+        
         if turns == 0 {
             showingReset = true
+            
+            degreeAmount = [0.0, 0.0, 0.0]
+            opacityAmount = [1.0, 1.0, 1.0]
+            scaleAmount = [1.0, 1.0, 1.0]
         } else {
             showingScore = true
         }
@@ -117,6 +146,10 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        
+        degreeAmount = [0.0, 0.0, 0.0]
+        opacityAmount = [1.0, 1.0, 1.0]
+        scaleAmount = [1.0, 1.0, 1.0]
     }
     
     func reset() {
