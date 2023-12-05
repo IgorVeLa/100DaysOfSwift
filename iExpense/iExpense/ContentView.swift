@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct ExpenseItem: Identifiable, Codable, Equatable {
+struct ExpenseItem: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     let name: String
     let type: String
@@ -76,12 +76,16 @@ struct ContentView: View {
             }
             .navigationTitle("iExpense")
             .toolbar {
-                Button("Add Expense", systemImage: "plus") {
-                    showingAddExpense.toggle()
+                // Project 9 Challenge 1
+                NavigationLink("Add expense") {
+                    AddView(expenses: expenses)
                 }
-            }
-            .sheet(isPresented: $showingAddExpense) {
-                AddView(expenses: expenses)
+//                Button("Add Expense", systemImage: "plus") {
+//                    showingAddExpense.toggle()
+//                }
+//            }
+//            .sheet(isPresented: $showingAddExpense) {
+//                AddView(expenses: expenses)
             }
         }
     }
