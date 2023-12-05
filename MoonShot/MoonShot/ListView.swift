@@ -17,9 +17,10 @@ struct ListView: View {
     var body: some View {
         List {
             ForEach(missions) { mission in
-                NavigationLink {
-                    MissionView(mission: mission, astronauts: astronauts)
-                } label: {
+//                NavigationLink {
+//                    MissionView(mission: mission, astronauts: astronauts)
+//                } label: {
+                NavigationLink(value: mission) {
                     HStack {
                         VStack {
                             Image(mission.image)
@@ -41,6 +42,10 @@ struct ListView: View {
                         }
                         .padding(.horizontal)
                     }
+                }
+                // Project 9 Challenge 3
+                .navigationDestination(for: Mission.self) { mission in
+                    MissionView(mission: mission, astronauts: astronauts)
                 }
             }
             .listRowBackground(Color.darkBackground)

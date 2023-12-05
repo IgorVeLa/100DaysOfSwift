@@ -14,6 +14,8 @@ struct GridView: View {
     let astronauts: [String: Astronaut]
     let missions: [Mission]
     
+    @State private var path = NavigationPath()
+    
     let columns = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -22,9 +24,10 @@ struct GridView: View {
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(missions) { mission in
-                    NavigationLink {
-                        MissionView(mission: mission, astronauts: astronauts)
-                    } label: {
+//                    NavigationLink {
+//                        MissionView(mission: mission, astronauts: astronauts)
+
+                    NavigationLink(value: mission) {
                         VStack {
                             Image(mission.image)
                                 .resizable()
@@ -50,6 +53,10 @@ struct GridView: View {
                                 .stroke(.lightBackground)
                         )
                     }
+                    // Project 9 Challenge 3
+                    .navigationDestination(for: Mission.self) { mission in
+                        MissionView(mission: mission, astronauts: astronauts)
+                    }
                 }
             }
             .padding([.horizontal, .bottom])
@@ -62,5 +69,5 @@ struct GridView: View {
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
     return GridView(astronauts: astronauts, missions: missions)
-        .preferredColorScheme(.dark)
+        //.preferredColorScheme(.dark)
 }
