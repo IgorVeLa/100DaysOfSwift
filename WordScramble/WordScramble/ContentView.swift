@@ -46,6 +46,9 @@ struct ContentView: View {
                             Image(systemName: "\(word.count).circle")
                             Text(word)
                         }
+                        // Project 15: Part 2
+                        .accessibilityElement()
+                        .accessibilityLabel("\(word), \(word.count) letters")
                     }
                 } header: {
                     if !usedWords.isEmpty {
