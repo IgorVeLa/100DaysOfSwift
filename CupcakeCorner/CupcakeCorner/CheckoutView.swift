@@ -21,14 +21,18 @@ struct CheckoutView: View {
     var body: some View {
         ScrollView {
             VStack {
-                AsyncImage(url: URL(string: "https://hws.dev/img/cupcakes@3x.jpg"), scale: 3) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(height: 233)
+                Group {
+                    AsyncImage(url: URL(string: "https://hws.dev/img/cupcakes@3x.jpg"), scale: 3) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(height: 233)
+                } 
+                // project 15: challenge 1
+                .accessibilityHidden(true)
                 
                 Text("Your total is \(order.cost, format: .currency(code: "USD"))")
                             .font(.title)
