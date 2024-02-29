@@ -2,7 +2,7 @@
 //  FriendFaceApp.swift
 //  FriendFace
 //
-//  Created by Igor L on 13/01/2024.
+//  Created by Igor L on 15/02/2024.
 //
 
 import SwiftUI

@@ -1,0 +1,7 @@
+- [x] Use PhotosPicker to let users import a photo from their photo library.
+- [x] Detect when a new photo is imported, and immediately ask the user to name the photo.
+- [x] Save that name and photo somewhere safe.
+- [x] Show all names and photos in a list, sorted by name.
+- [x] Create a detail screen that shows a picture full size.
+- [x] Decide on a way to save all this data.
+- [x] Convert to MVVM model
